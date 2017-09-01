@@ -1,0 +1,30 @@
+/*
+ * Document View
+ * ------------------------------ */
+
+main.document {
+  overflow: hidden;
+}
+
+.list-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-group-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.list-group-item label {
+  display: block;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.list-group-btn {
+  padding: 15px;
+  margin: 10px;
+  width: calc(25vw - 20px);
+  text-align: center;
+}
