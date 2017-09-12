@@ -20,3 +20,7 @@ $ npm start
 The example app is now running on <http://localhost:3000>.
 
 Upload a PDF via the button in the top-left, then click on the cover image to see PSPDFKit for Web in action.
+
+## Contributing
+  
+Please ensure [you signed our CLA](https://pspdfkit.com/guides/web/current/miscellaneous/contributing/) so we can accept your contributions.
