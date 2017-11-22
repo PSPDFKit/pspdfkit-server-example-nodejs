@@ -54,6 +54,10 @@ The example app is now running on <http://localhost:3000>.
 
 Upload a PDF via the button in the top-left, then click on the cover image to see PSPDFKit for Web in action.
 
+You can quit the running containers with Ctrl-C.
+
+If you want to test PSPDFKit for Web on different devices in your local network, you need
+to edit the `PSPDFKIT_SERVER_EXTERNAL_URL` environment variable in the `docker-compose.yml` and set it to an address that's reachable from your device.
 
 ## Contributing
 
