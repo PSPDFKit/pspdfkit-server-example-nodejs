@@ -3,8 +3,10 @@
 This example shows how to integrate PSPDFKit Server and
 [PSPDFKit for Web](https://pspdfkit.com/web/) into a Node.js / Express app.
 
-You need to have an activation key for PSPDFKit Server - if you don't have one just
-[request a trial](https://pspdfkit.com/try/).
+## Request a License
+
+You'll need a license for PSPDFKit Server. If you don't already have one
+you can [request a free trial here](https://pspdfkit.com/try/).
 
 ## Getting Started with Docker
 
@@ -16,11 +18,11 @@ host and it will live-reload.
 ```sh
 $ git clone git@github.com:PSPDFKit/pspdfkit-server-example-nodejs.git
 $ cd pspdfkit-server-example-nodejs
-$ PSPDFKIT_ACTIVATION_KEY=<YOUR_ACTIVATION_KEY> docker-compose up
+$ ACTIVATION_KEY=YOUR_ACTIVATION_KEY_GOES_HERE docker-compose up
 ```
 
-Make sure to replace `<YOUR_ACTIVATION_KEY>` with your PSPDFKit Server activation key. You only have
-to provide the activation key once, after that the server will remain activated until you reset it.
+Make sure to replace `YOUR_ACTIVATION_KEY_GOES_HERE` with your [PSPDFKit Server activation key](#request-a-license).
+You only have to provide the activation key once, after that the server will remain activated until you reset it.
 
 The example app is now running on <http://localhost:3000>. You can access PSPDFKit Server's
 dashboard at <http://localhost:5000/dashboard> using `dashboard` // `secret`.
@@ -34,7 +36,7 @@ You can reset the server by first tearing down its containers and volumes and th
 
 ```sh
 $ docker-compose down --volumes
-$ PSPDFKIT_ACTIVATION_KEY=<YOUR_ACTIVATION_KEY> docker-compose up
+$ ACTIVATION_KEY=YOUR_ACTIVATION_KEY_GOES_HERE docker-compose up
 ```
 
 ## Running the example locally
