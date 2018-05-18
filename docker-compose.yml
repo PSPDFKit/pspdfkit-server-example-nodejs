@@ -22,7 +22,7 @@ services:
       PGPORT: 5432
 
       # Activation key for your PSPDFKit Server installation
-      ACTIVATION_KEY: ${PSPDFKIT_ACTIVATION_KEY}
+      ACTIVATION_KEY: ${ACTIVATION_KEY}
 
       # Secret token used for authenticating API requests.
       API_AUTH_TOKEN: secret
