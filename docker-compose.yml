@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:9.6
+    environment:
+      POSTGRES_USER: pspdfkit
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pspdfkit
+      POSTGRES_INITDB_ARGS: --data-checksums
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  pspdfkit:
+    image: "${PSPDFKIT_IMAGE:-docker.pspdfkit.com/pspdfkit:latest}"
+
+    environment:
+      PGUSER: pspdfkit
+      PGPASSWORD: password
+      PGDATABASE: pspdfkit
+      PGHOST: db
+      PGPORT: 5432
+
+      # Activation key for your PSPDFKit Server installation
+      ACTIVATION_KEY: ${ACTIVATION_KEY}
+
+      # Secret token used for authenticating API requests.
+      API_AUTH_TOKEN: secret
+
+      # Base key used for deriving secret keys for the purposes of authentication.
+      SECRET_KEY_BASE: secret-key-base
+
+      # Public key used for verification of JWTs from web clients. It has to be in the PEM format.
+      JWT_PUBLIC_KEY: |
+        -----BEGIN PUBLIC KEY-----
+        MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALd41vG5rMzG26hhVxE65kzWC+bYQ94t
+        OxsSxIQZMOc1GY8ubuqu2iku5/5isaFfG44e+VAe+YIdVeQY7cUkaaUCAwEAAQ==
+        -----END PUBLIC KEY-----
+      JWT_ALGORITHM: RS256
+
+      # Credentials to access the admin dashboard
+      DASHBOARD_USERNAME: dashboard
+      DASHBOARD_PASSWORD: secret
+
+      # Asset storage backend that is used by PSPDFKit Server
+      ASSET_STORAGE_BACKEND: built-in
+
+    depends_on:
+    - db
+    ports:
+      - "5000:5000"
+  example:
+    build: .
+    environment:
+      PSPDFKIT_SERVER_INTERNAL_URL: http://pspdfkit:5000
+      PSPDFKIT_SERVER_EXTERNAL_URL: http://localhost:5000
+      API_AUTH_TOKEN: secret
+    depends_on:
+      - pspdfkit
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+
+volumes:
+  pgdata:
+  node_modules:

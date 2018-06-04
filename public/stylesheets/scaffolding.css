@@ -1,0 +1,93 @@
+/*
+ * Scaffolding
+ * ------------------------------ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  background: #f7f7f7;
+}
+
+h1 {
+  font-weight: normal;
+  font-size: 18px;
+}
+
+a {
+  color: #14a0e2;
+}
+
+.btn {
+  background: #14a0e2;
+  border: 0;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 3px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-default {
+  background: transparent;
+  border: 1px solid #14a0e2;
+  color: #14a0e2;
+}
+
+.btn-success {
+  background: #00d37a;
+  color: #fff;
+}
+
+.btn-danger {
+  background: #ff4a4a;
+  color: #fff;
+}
+
+main {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  background: #fff;
+  flex: 1;
+  width: 25vw;
+  border-left: 1px solid #ddd;
+}
+
+.sidebar .owner {
+  color: #bbb;
+}
+
+.sidebar-title {
+  color: #bbb;
+  font-weight: normal;
+  font-size: 14px;
+  padding: 20px;
+  margin: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.viewer {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 60px);
+}
+
+@media only screen and (max-device-width: 992px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+@media only screen and (max-device-width: 768px) {
+  #upload {
+    display: none;
+  }
+}
