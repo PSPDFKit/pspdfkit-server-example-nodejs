@@ -28,7 +28,7 @@ $ ACTIVATION_KEY=YOUR_ACTIVATION_KEY_GOES_HERE docker-compose up
 If you are using Windows make sure to set the environment variables accordingly. For this replace the line starting with `PSPDFKIT_ACTIVATION_KEY="...` with:
 
 ```shell
-$ SET "PSPDFKIT_ACTIVATION_KEY"=YOUR_ACTIVATION_KEY_GOES_HERE
+$ SET "PSPDFKIT_ACTIVATION_KEY=YOUR_ACTIVATION_KEY_GOES_HERE"
 $ docker-compose up
 ```
 
