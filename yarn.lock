@@ -269,8 +269,9 @@ braces@^1.8.2:
     repeat-element "^1.1.2"
 
 bson@~1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.4.tgz#93c10d39eaa5b58415cbc4052f3e53e562b0b72c"
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.9.tgz#12319f8323b1254739b7c6bef8d3e89ae05a2f57"
+  integrity sha512-IQX9/h7WdMBIW/q/++tGd+emQr0XMdeZ6icnT/74Xk9fnabWn+gZgpE+9V+gujL3hhJOoNrnDVY7tWdzc7NUTg==
 
 buffer-equal-constant-time@1.0.1:
   version "1.0.1"
@@ -1964,10 +1965,10 @@ pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
-pspdfkit@2020.6.4:
-  version "2020.6.4"
-  resolved "https://registry.yarnpkg.com/pspdfkit/-/pspdfkit-2020.6.4.tgz#df2bffd72eccbc58efd010ba3fcc3edc63a420f0"
-  integrity sha512-+cmELbgp129o6fBeDDqyWEJeksqkkOlPaJfe8NBbncA28TiY+eyceUKUwGT9QNka1+WPFTG+b2Jzm1Jt6zxENw==
+pspdfkit@2021.4.0:
+  version "2021.4.0"
+  resolved "https://registry.yarnpkg.com/pspdfkit/-/pspdfkit-2021.4.0.tgz#fa4a4ae77a399305503162e55ec08d65bb86d5c5"
+  integrity sha512-whI1nlpB+0UIRYH8tYTO/ugI+HhcIaksb/C9yL6nqjibZw4QAPYnjYm1eAXLU7AP0JZufQHuYwheB4G2lskmPw==
 
 punycode@^1.4.1:
   version "1.4.1"
