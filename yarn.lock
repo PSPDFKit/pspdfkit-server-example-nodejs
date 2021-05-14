@@ -1506,13 +1506,10 @@ lodash.restparam@^3.0.0:
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/lodash.restparam/-/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.3.0:
-  version "4.17.4"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
-
-lodash@^4.13.1:
-  version "4.17.5"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
+lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.3.0:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 lowercase-keys@^1.0.0:
   version "1.0.0"
@@ -1964,10 +1961,10 @@ pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
-pspdfkit@2020.6.4:
-  version "2020.6.4"
-  resolved "https://registry.yarnpkg.com/pspdfkit/-/pspdfkit-2020.6.4.tgz#df2bffd72eccbc58efd010ba3fcc3edc63a420f0"
-  integrity sha512-+cmELbgp129o6fBeDDqyWEJeksqkkOlPaJfe8NBbncA28TiY+eyceUKUwGT9QNka1+WPFTG+b2Jzm1Jt6zxENw==
+pspdfkit@2021.4.0:
+  version "2021.4.0"
+  resolved "https://registry.yarnpkg.com/pspdfkit/-/pspdfkit-2021.4.0.tgz#fa4a4ae77a399305503162e55ec08d65bb86d5c5"
+  integrity sha512-whI1nlpB+0UIRYH8tYTO/ugI+HhcIaksb/C9yL6nqjibZw4QAPYnjYm1eAXLU7AP0JZufQHuYwheB4G2lskmPw==
 
 punycode@^1.4.1:
   version "1.4.1"
