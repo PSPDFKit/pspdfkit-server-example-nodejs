@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PSPDFKit Web Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="/stylesheets/app.css" />
+    <script src="<%= pspdfkitExternalUrl %>/pspdfkit.js"></script>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-left">
+        <a href="/" class="navbar-icon">&lt;</a>
+      </div>
+      <div class="navbar-center">
+        <h1><%= doc.title %></h1>
+      </div>
+      <div class="navbar-right">
+        <% if (instant) { %>
+          <a href="?instant=false" class="btn btn-success navbar-btn">Instant: ON</a>
+        <% } else { %>
+          <a href="?instant=true" class="btn btn-default navbar-btn">Instant: OFF</a>
+        <% } %>
+        <% if(user == doc.owner) { %>
+          <a href="/delete/<%= doc.id %>" onclick="return confirm('Are you sure?')" class="btn btn-danger navbar-btn">Delete document</a>
+        <% } %>
+      </div>
+    </header>
+    <main class="document">
+      <div id="doc-viewer" class="viewer"></div>
+      <script>
+      var configuration = {
+        authPayload: { jwt: "<%= jwt %>" },
+        container: "#doc-viewer",
+        documentId: "<%= doc.id %>",
+        instant: <%= instant %>
+      };
+      PSPDFKit.load(configuration).catch(function(error) {
+        console.log(error);
+      });
+      </script>
+      <div class="sidebar">
+        <h3 class="sidebar-title">Who can see this document?</h3>
+        <form action="/d/<%= doc.id %>/users" method="post">
+          <ul class="list-group">
+            <% allUsers.forEach(function(u) { %>
+              <li class="list-group-item">
+                <label>
+                  <% if(u == doc.owner) { %>
+                    <span class="owner">
+                      <%= u %> (Owner)
+                    </span>
+                    <input type="checkbox" disabled checked/>
+                  <% } else { %>
+                    <input
+                      type="checkbox"
+                      name="users[]"
+                      value="<%= u %>"
+                      <%= (u == doc.owner) ? 'disabled' : '' %>
+                      <%= hasAccess(u, doc) ? 'checked' : '' %>/>
+                    <%= u %>
+                  <% } %>
+                </label>
+              </li>
+            <% }) %>
+          </ul>
+          <button type="submit" class="btn list-group-btn">Update share settings</button>
+        </form>
+        <h3 class="sidebar-title">Available Layers</h3>
+        <ul class="list-group">
+          <% layers.forEach(function(l) { %>
+            <li class="list-group-item<%= l === layer ? ' current' : '' %>">
+              <a href="/d/<%= doc.id %>/<%= l %>">
+                <% if(l === ''){ %>
+                  Default Layer
+                <% } else { %>
+                  <%= l %>
+                <% } %>
+              </a>
+            </li>
+          <% }) %>
+          <% if(!layers.includes(layer)){ %>
+            <li class="list-group-item current">
+              <a href="/d/<%= doc.id %>/<%= layer %>">
+                  <%= layer %>
+              </a>
+            </li>
+          <% } %>
+        </ul>
+        <div class="create-layer-form">
+          <h3 class="sidebar-title">Create New Layer</h3>
+          <form action="/d/change_layer" method="post">
+            <input type="text" name="layer" />
+            <input type="hidden" name="document_id" value="<%= doc.id%>" />
+            <button type="submit" class="btn list-group-btn">Create Layer</button>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </body>
+</html>
