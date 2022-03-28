@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PSPDFKit Web Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="/stylesheets/app.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-left">
+        <form id="upload" action="/upload" method="post" enctype="multipart/form-data">
+          <input type="file" name="file" accept="application/pdf">
+          <button class="btn">Upload PDF</button>
+        </form>
+      </div>
+      <div class="navbar-center">
+        <h1>Your Documents</h1>
+      </div>
+      <div class="navbar-right">
+        <span class="user"><%= user %></span>
+        <a class="btn btn-default navbar-btn" href="/login">logout</a>
+      </div>
+    </header>
+    <main>
+      <div class="thumbnails">
+        <% docs.forEach(function(d) { %>
+          <div class="thumbnail">
+            <a href="/d/<%= d.id %>" class="doc-list-item">
+              <div class="thumbnail-img">
+                <img src="<%= d.coverUrl %>" />
+              </div>
+              <div class="thumbnail-caption">
+                <span><%= d.title %></span>
+              </div>
+            </a>
+          </div>
+        <% }) %>
+      </div>
+    </main>
+    <script src="/javascripts/upload.js"></script>
+  </body>
+</html>
