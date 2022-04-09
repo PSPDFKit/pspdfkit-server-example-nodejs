@@ -1620,8 +1620,9 @@ mkdirp@0.3.0:
     minimist "0.0.8"
 
 moment@2.x.x:
-  version "2.18.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+  version "2.29.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.2.tgz#00910c60b20843bcba52d37d58c628b47b1f20e4"
+  integrity sha512-UgzG4rvxYpN15jgCmVJwac49h9ly9NurikMWGPdVxm8GZD6XjkKPxDTjQQ43gtGgnV3X0cAyWDdP2Wexoquifg==
 
 mongodb-core@2.1.11:
   version "2.1.11"
@@ -1964,10 +1965,10 @@ pseudomap@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
-pspdfkit@2020.6.4:
-  version "2020.6.4"
-  resolved "https://registry.yarnpkg.com/pspdfkit/-/pspdfkit-2020.6.4.tgz#df2bffd72eccbc58efd010ba3fcc3edc63a420f0"
-  integrity sha512-+cmELbgp129o6fBeDDqyWEJeksqkkOlPaJfe8NBbncA28TiY+eyceUKUwGT9QNka1+WPFTG+b2Jzm1Jt6zxENw==
+pspdfkit@2022.2.0:
+  version "2022.2.0"
+  resolved "https://registry.yarnpkg.com/pspdfkit/-/pspdfkit-2022.2.0.tgz#c7613349ab6b552d19f923841f6c351512d068cc"
+  integrity sha512-CQcgao4LMC/JJ8rK90lDdyj27oruqkMdlsUhETRgjm8y2OlvPJgMrm+aP2jaz6zRGmfzUYZpgjMaBJOT2RJQJA==
 
 punycode@^1.4.1:
   version "1.4.1"
