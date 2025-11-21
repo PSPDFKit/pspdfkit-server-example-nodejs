@@ -1,0 +1,119 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U db-user -d nutrient"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+    environment:
+      POSTGRES_USER: db-user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ai_document_assistant
+      POSTGRES_INITDB_ARGS: --data-checksums
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  document_engine:
+    image: "${DOCUMENT_ENGINE_IMAGE:-pspdfkit/document-engine:latest}"
+
+    environment:
+      PGUSER: db-user
+      PGPASSWORD: password
+      PGDATABASE: nutrient
+      PGHOST: db
+      PGPORT: 5432
+
+      # Activation key for your Nutrient Document Engine installation
+      ACTIVATION_KEY: ${ACTIVATION_KEY}
+
+      # Secret token used for authenticating API requests.
+      API_AUTH_TOKEN: secret
+
+      # Base key used for deriving secret keys for the purposes of authentication.
+      SECRET_KEY_BASE: secret-key-base
+
+      # Public key used for verification of JWTs from web clients. It has to be in the PEM format.
+      JWT_PUBLIC_KEY: |
+        -----BEGIN PUBLIC KEY-----
+        MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAmOePeK068cxlRWt7Mgf0
+        2VaxUhUQYVXo4/aa1ShZKBp7pHWl4JWzegjX09Y8Ltu2GO15n8s0x+2A3BBjIfHD
+        xILrPrT+A7MRQwVrFOXCJr5LhXb6JA5VGW+TfTZsZd1lKg2Bnxz26A5pppjDIjVl
+        Dt6KwcnQLeRAV6xZ/H01pIR884IXc6mX3kNxLFS0WcmbmgOCXv3aLCVbMSgubVvc
+        Yel9CcpYipq7Pe04ArNHaqQWke8/E94tscJgZRfRD1ZolZGF98NMwMwMNe9G53Ug
+        X2qYtrGSvhsW184brvmC5U69N2Czli5xazyloowpb/dHTjUkhYJkp/Jf5/rjH+pg
+        RyUyKlxDXhNvpWAVA6UZdrVDCctYhokKiuV4A354L7mz0/cpFkIBzOZbquIBgNlJ
+        lsHj5Jx+s9Dn5dvaBbddamE2JsOyTzLad8VuZaQtBOwZdFIn5o82fdtEWaZh3CBx
+        9bymM73XrQXCQnfMSV1SARk7VRruxKnZHS1a8Yy27ppXYiFUw081otk8CECayufZ
+        b/SbcsnEM7a5dEdVECA+mKLYgvl3fr/svy+6TbTEnHusj6Cngw9SO+4SyEeEd+nG
+        6ZTjh2UWIAN4hQ3Wccuuq48hWPBo5bdMBDaTpUA/ZqLVU5EKkSnMPY1V4rG3Yu3Y
+        0jeHR29ZIY18h2Pk/igZd1kCAwEAAQ==
+        -----END PUBLIC KEY-----
+      JWT_ALGORITHM: RS256
+      # Credentials to access the admin dashboard
+      DASHBOARD_USERNAME: dashboard
+      DASHBOARD_PASSWORD: secret
+
+      # Asset storage backend that is used by Nutrient Document Engine
+      ASSET_STORAGE_BACKEND: built-in
+
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+  example:
+    build: .
+    environment:
+      DOCUMENT_ENGINE_INTERNAL_URL: http://document_engine:5000
+      DOCUMENT_ENGINE_EXTERNAL_URL: http://localhost:5000
+      API_AUTH_TOKEN: secret
+      AIA_INTERNAL_URL: http://ai-assistant:4000
+      AIA_EXTERNAL_URL: http://localhost:4000
+    depends_on:
+      - document_engine
+    ports:
+      - "3000:3000"
+    volumes:
+      - app_db:/app/db
+
+  ai-assistant:
+    image: pspdfkit/ai-assistant:latest
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      DE_URL: http://document_engine:5000
+      DE_API_AUTH_TOKEN: secret
+      PGUSER: db-user
+      PGPASSWORD: password
+      PGDATABASE: ai_document_assistant
+      PGHOST: db
+      PGPORT: 5432
+      ACTIVATION_KEY: ${AIA_ACTIVATION_KEY}
+      API_AUTH_TOKEN: secret
+      JWT_PUBLIC_KEY: |
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2gzhmJ9TDanEzWdP1WG+
+        0Ecwbe7f3bv6e5UUpvcT5q68IQJKP47AQdBAnSlFVi4X9SaurbWoXdS6jpmPpk24
+        QvitzLNFphHdwjFBelTAOa6taZrSusoFvrtK9x5xsW4zzt/bkpUraNx82Z8MwLwr
+        t6HlY7dgO9+xBAabj4t1d2t+0HS8O/ed3CB6T2lj6S8AbLDSEFc9ScO6Uc1XJlSo
+        rgyJJSPCpNhSq3AubEZ1wMS1iEtgAzTPRDsQv50qWIbn634HLWxTP/UH6YNJBwzt
+        3O6q29kTtjXlMGXCvin37PyX4Jy1IiPFwJm45aWJGKSfVGMDojTJbuUtM+8P9Rrn
+        AwIDAQAB
+        -----END PUBLIC KEY-----
+      JWT_ALGORITHM: RS256
+      DASHBOARD_USERNAME: dashboard
+      DASHBOARD_PASSWORD: secret
+      SECRET_KEY_BASE: secret-key-base
+    ports:
+      - 4000:4000
+    depends_on:
+      document_engine:
+        condition: service_started
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  app_db:
