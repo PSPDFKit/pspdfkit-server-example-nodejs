@@ -1,0 +1,55 @@
+/*
+ * Document View
+ * ------------------------------ */
+
+main.document {
+  overflow: hidden;
+}
+
+.list-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-group-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.list-group-item label,
+a {
+  display: block;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.list-group-item a {
+  text-decoration: none;
+}
+
+.list-group-item.current {
+  background-color: #eee;
+}
+
+.create-layer-form {
+  margin-top: 30px;
+}
+
+.create-layer-form > .sidebar-title {
+  border-bottom: none;
+}
+
+.create-layer-form input[type="text"] {
+  width: calc(25vw - 20px);
+  margin-right: 10px;
+  margin-left: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.list-group-btn {
+  padding: 15px;
+  margin: 10px;
+  width: calc(25vw - 20px);
+  text-align: center;
+}
