@@ -1,0 +1,29 @@
+# Caddy reverse proxy that unifies the example app and Document Engine under a
+# single origin (http://localhost:8080).
+#
+# The Nutrient Web SDK, its assets, document data, Instant sync and the Instant
+# WebSocket are all served by Document Engine. When the browser reaches them on
+# a different origin than the app, privacy features and extensions (for example
+# Firefox Enhanced Tracking Protection) can silently block those cross-origin
+# requests, leaving the viewer unable to load.
+#
+# Serving everything from one origin removes that problem entirely: the browser
+# only ever talks to localhost:8080. Caddy routes Document Engine's
+# browser-facing paths to the document_engine service and everything else to the
+# example app. reverse_proxy handles WebSocket upgrades transparently, so Instant
+# real-time sync works without any extra configuration.
+:8080 {
+	# Document Engine browser-facing paths.
+	#   /nutrient-viewer.js    SDK bootstrap (redirects to /pspdfkit-web/<version>)
+	#   /nutrient-viewer-lib/* SDK assets requested relative to the origin root
+	#                          (Document Engine redirects these to /pspdfkit-web/<version>)
+	#   /pspdfkit-web/*        SDK assets (JS chunks, WASM, styles)
+	#   /i/*                   Instant document sync, page tiles, and WebSocket
+	#   /documents/*           document cover images
+	#   /dashboard*            Document Engine admin dashboard
+	@document_engine path /nutrient-viewer.js /nutrient-viewer-lib/* /pspdfkit-web/* /i/* /documents/* /dashboard*
+	reverse_proxy @document_engine document_engine:5000
+
+	# Everything else is the example application.
+	reverse_proxy example:3000
+}
