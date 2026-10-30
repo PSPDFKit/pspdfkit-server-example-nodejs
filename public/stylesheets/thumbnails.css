@@ -1,0 +1,46 @@
+/*
+ * Thumbnails
+ * ------------------------------ */
+
+.thumbnails {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.thumbnail {
+  width: 180px;
+  height: 200px;
+  margin: 20px 0 0 20px;
+  text-align: center;
+  background: #fff;
+}
+
+.thumbnail a {
+  text-decoration: none;
+  color: #000;
+}
+
+.thumbnail-img {
+  height: 140px;
+  overflow: hidden;
+}
+
+.thumbnail-img img {
+  width: 100%;
+}
+
+.thumbnail-caption {
+  display: flex;
+  height: 60px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.thumbnail-caption span {
+  width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
